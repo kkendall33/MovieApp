@@ -16,10 +16,12 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         try? movieStore.saveContext()
         
-        service.requestMovies(term: nil, page: 0) { data, error in
+        service.requestMovies(term: "batman", page: 1) { data, error in
             print("hey")
             if let data = data {
                 print("got data")
+                let json = try! JSONSerialization.jsonObject(with: data, options: [])
+                print("\(json)")
             }
             
             if let error = error {

@@ -26,6 +26,9 @@
 		99C820F2206B7B7A00706F33 /* MovieService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99C820F1206B7B7A00706F33 /* MovieService.swift */; };
 		99C820F5206B7DD700706F33 /* IntExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99C820F4206B7DD700706F33 /* IntExtension.swift */; };
 		99C820F7206B7E0800706F33 /* IntExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99C820F6206B7E0800706F33 /* IntExtensionTests.swift */; };
+		99ED6BCD206B83C50007C51A /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99ED6BCC206B83C50007C51A /* Movie.swift */; };
+		99ED6BCF206B83CE0007C51A /* Query.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99ED6BCE206B83CE0007C51A /* Query.swift */; };
+		99ED6BD1206B84060007C51A /* ImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99ED6BD0206B84060007C51A /* ImageService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,6 +75,9 @@
 		99C820F1206B7B7A00706F33 /* MovieService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieService.swift; sourceTree = "<group>"; };
 		99C820F4206B7DD700706F33 /* IntExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntExtension.swift; sourceTree = "<group>"; };
 		99C820F6206B7E0800706F33 /* IntExtensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntExtensionTests.swift; sourceTree = "<group>"; };
+		99ED6BCC206B83C50007C51A /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
+		99ED6BCE206B83CE0007C51A /* Query.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Query.swift; sourceTree = "<group>"; };
+		99ED6BD0206B84060007C51A /* ImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageService.swift; sourceTree = "<group>"; };
 		FA4867CC8D846952C912C9DA /* Pods-MovieApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovieApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MovieApp/Pods-MovieApp.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -149,6 +155,7 @@
 				99AB7732206B4DE200E1A0B1 /* Assets.xcassets */,
 				99AB7734206B4DE200E1A0B1 /* LaunchScreen.storyboard */,
 				99AB7737206B4DE200E1A0B1 /* Info.plist */,
+				99ED6BCB206B82E80007C51A /* Model */,
 				99C820F3206B7DCF00706F33 /* Extensions */,
 				99C820EE206B728400706F33 /* Services */,
 				99C820E3206B59C900706F33 /* Network */,
@@ -202,6 +209,7 @@
 				99C820E6206B60FB00706F33 /* Endpoints.swift */,
 				99C820EF206B7A9D00706F33 /* MovieAppRequest.swift */,
 				99C820F1206B7B7A00706F33 /* MovieService.swift */,
+				99ED6BD0206B84060007C51A /* ImageService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -212,6 +220,15 @@
 				99C820F4206B7DD700706F33 /* IntExtension.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		99ED6BCB206B82E80007C51A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				99ED6BCC206B83C50007C51A /* Movie.swift */,
+				99ED6BCE206B83CE0007C51A /* Query.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -409,11 +426,14 @@
 				99C820E9206B679B00706F33 /* Path.swift in Sources */,
 				99C820F0206B7A9D00706F33 /* MovieAppRequest.swift in Sources */,
 				99C820F5206B7DD700706F33 /* IntExtension.swift in Sources */,
+				99ED6BCF206B83CE0007C51A /* Query.swift in Sources */,
 				99AB772B206B4DE200E1A0B1 /* ViewController.swift in Sources */,
 				99AB7729206B4DE200E1A0B1 /* AppDelegate.swift in Sources */,
 				99AB7731206B4DE200E1A0B1 /* MovieApp.xcdatamodeld in Sources */,
+				99ED6BD1206B84060007C51A /* ImageService.swift in Sources */,
 				99C820F2206B7B7A00706F33 /* MovieService.swift in Sources */,
 				99C820E7206B60FB00706F33 /* Endpoints.swift in Sources */,
+				99ED6BCD206B83C50007C51A /* Movie.swift in Sources */,
 				99C820E0206B511000706F33 /* Store.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

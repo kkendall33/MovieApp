@@ -10,16 +10,13 @@ import Foundation
 
 class MovieService {
     
-    func requestMovies(term: String? = nil, page: Int, with completion: @escaping (_ data: Data?, _ error: Error?)->()) -> URLSessionDataTask? {
-        var queryItems: [URLQueryItem] = []
+    @discardableResult
+    func requestMovies(term: String, page: Int, with completion: @escaping (_ data: Data?, _ error: Error?)->()) -> URLSessionDataTask? {
         let apiKey = URLQueryItem(name: "api_key", value: tmdbAPIKey)
-        queryItems.append(apiKey)
         let page = URLQueryItem(name: "page", value: page.stringValue)
-        queryItems.append(page)
-        if let term = term {
-            let termQuery = URLQueryItem(name: "query", value: term)
-            queryItems.append(termQuery)
-        }
+        let termQuery = URLQueryItem(name: "query", value: term)
+        
+        let queryItems: [URLQueryItem] = [apiKey, page, termQuery]
         let task = tmdbRequest.request(with: Endpoints.movies, queryItems: queryItems) { data, response, error in
             completion(data, error)
         }

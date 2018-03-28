@@ -9,17 +9,25 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    
+    private let service = MovieService()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        try? movieStore.saveContext()
+        
+        service.requestMovies(term: nil, page: 0) { data, error in
+            print("hey")
+            if let data = data {
+                print("got data")
+            }
+            
+            if let error = error {
+                print("got error: \(error)")
+            }
+        }
+        
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
-
+    
 }
 

@@ -13,5 +13,5 @@ import Foundation
 /// (using an enum as a 'namespace')
 enum Endpoints {
     static let movies: String = "/3/search/movie"
-    static let image: String = "/t/p/{fileSize}/{filename}"
+    static let image: String = "/t/p/{fileSize}"
 }

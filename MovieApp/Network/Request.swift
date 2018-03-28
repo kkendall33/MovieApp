@@ -8,13 +8,7 @@
 
 import Foundation
 
-//let path = "/3/search/movie"
-//let hd = "api_key=2696829a81b1b5827d515ff121700838&query=batman&page=1"
-//let movieDomain = "api.themoviedb.org"
-//
-//let imageDomain = "image.tmdb.org/t/p/w92/2DtPSyODKWXluIRV7PVru0SSzja.jpg"
-
-class Request {
+final class Request {
     
     private enum Method: String {
         case get = "GET"
@@ -32,7 +26,7 @@ class Request {
         self.domain = domain
     }
     
-    func request(with path: String, queryItems: [URLQueryItem], completion: @escaping (_ data: Data?, _ response: URLResponse?, _ error: Error?)->()) -> URLSessionDataTask? {
+    func request(with path: String, queryItems: [URLQueryItem] = [], completion: @escaping (_ data: Data?, _ response: URLResponse?, _ error: Error?)->()) -> URLSessionDataTask? {
         guard let url = self.url(with: path, queryItems: queryItems) else { return nil }
         var request = URLRequest(url: url, cachePolicy: .returnCacheDataElseLoad, timeoutInterval: timeout)
         request.httpMethod = Method.get.rawValue
@@ -40,7 +34,7 @@ class Request {
         return urlSession.dataTask(with: request, completionHandler: completion)
     }
     
-    func download(with path: String, queryItems: [URLQueryItem], completion: @escaping (_ url: URL?, _ response: URLResponse?, _ error: Error?)->()) -> URLSessionDownloadTask? {
+    func download(with path: String, queryItems: [URLQueryItem] = [], completion: @escaping (_ url: URL?, _ response: URLResponse?, _ error: Error?)->()) -> URLSessionDownloadTask? {
         guard let url = self.url(with: path, queryItems: queryItems) else { return nil }
         var request = URLRequest(url: url, cachePolicy: .returnCacheDataElseLoad, timeoutInterval: timeout)
         request.httpMethod = Method.get.rawValue

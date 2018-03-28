@@ -10,13 +10,14 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    private let service = MovieService()
+    private let movieService = MovieService()
+    private let imageService = ImageService()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         try? movieStore.saveContext()
         
-        service.requestMovies(term: "batman", page: 1) { data, error in
+        movieService.requestMovies(term: "batman", page: 1) { data, error in
             print("hey")
             if let data = data {
                 print("got data")
@@ -26,6 +27,15 @@ class ViewController: UIViewController {
             
             if let error = error {
                 print("got error: \(error)")
+            }
+        }
+        
+        imageService.downloadImage(with: "/bI1YVuhBN6Vws1GP9Mf01DyhC2s.jpg", imageSize: .w92) { url, error in
+            if let url = url {
+                print("url: \(url)")
+            }
+            if let error = error {
+                print("error: \(error)")
             }
         }
         

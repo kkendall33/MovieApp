@@ -11,14 +11,11 @@ import Foundation
 final class ImageService {
     
     @discardableResult
-    func requestMovies(term: String, page: Int, with completion: @escaping (_ data: Data?, _ error: Error?)->()) -> URLSessionDataTask? {
-        let apiKey = URLQueryItem(name: "api_key", value: tmdbAPIKey)
-        let page = URLQueryItem(name: "page", value: page.stringValue)
-        let termQuery = URLQueryItem(name: "query", value: term)
-        
-        let queryItems: [URLQueryItem] = [apiKey, page, termQuery]
-        let task = imageRequest.request(with: Endpoints.movies, queryItems: queryItems) { data, response, error in
-            completion(data, error)
+    func downloadImage(with filePath: String, imageSize: ImageSize, completion: @escaping (_ fileURL: URL?, _ error: Error?)->()) -> URLSessionDownloadTask? {
+        let pathArgument = Path.Argument(key: "fileSize", value: imageSize.rawValue)
+        guard let path = try? Path(originalPath: Endpoints.image, pathArguments: [pathArgument]) else { return nil }
+        let task = imageRequest.download(with: path.path + filePath) { fileURL, response, error in
+            completion(fileURL, error)
         }
         task?.resume()
         return task

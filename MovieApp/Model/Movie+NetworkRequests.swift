@@ -1,5 +1,5 @@
 //
-//  Query.swift
+//  Movie+Service.swift
 //  MovieApp
 //
 //  Created by Kyle Kendall on 3/28/18.
@@ -8,6 +8,9 @@
 
 import Foundation
 
-struct Query {
-    let term: String
+
+extension Movie {
+    
+    
+    
 }

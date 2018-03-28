@@ -8,8 +8,20 @@
 
 import Foundation
 
-class ImageService {
+final class ImageService {
     
-    
+    @discardableResult
+    func requestMovies(term: String, page: Int, with completion: @escaping (_ data: Data?, _ error: Error?)->()) -> URLSessionDataTask? {
+        let apiKey = URLQueryItem(name: "api_key", value: tmdbAPIKey)
+        let page = URLQueryItem(name: "page", value: page.stringValue)
+        let termQuery = URLQueryItem(name: "query", value: term)
+        
+        let queryItems: [URLQueryItem] = [apiKey, page, termQuery]
+        let task = imageRequest.request(with: Endpoints.movies, queryItems: queryItems) { data, response, error in
+            completion(data, error)
+        }
+        task?.resume()
+        return task
+    }
     
 }

@@ -8,7 +8,7 @@
 
 import Foundation
 
-class MovieService {
+final class MovieService {
     
     @discardableResult
     func requestMovies(term: String, page: Int, with completion: @escaping (_ data: Data?, _ error: Error?)->()) -> URLSessionDataTask? {

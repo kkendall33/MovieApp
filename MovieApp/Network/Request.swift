@@ -33,19 +33,27 @@ class Request {
     }
     
     func request(with path: String, queryItems: [URLQueryItem], completion: @escaping (_ data: Data?, _ response: URLResponse?, _ error: Error?)->()) -> URLSessionDataTask? {
+        guard let url = self.url(with: path, queryItems: queryItems) else { return nil }
+        var request = URLRequest(url: url, cachePolicy: .returnCacheDataElseLoad, timeoutInterval: timeout)
+        request.httpMethod = Method.get.rawValue
         
+        return urlSession.dataTask(with: request, completionHandler: completion)
+    }
+    
+    func download(with path: String, queryItems: [URLQueryItem], completion: @escaping (_ url: URL?, _ response: URLResponse?, _ error: Error?)->()) -> URLSessionDownloadTask? {
+        guard let url = self.url(with: path, queryItems: queryItems) else { return nil }
+        var request = URLRequest(url: url, cachePolicy: .returnCacheDataElseLoad, timeoutInterval: timeout)
+        request.httpMethod = Method.get.rawValue
+        return urlSession.downloadTask(with: request, completionHandler: completion)
+    }
+    
+    private func url(with path: String, queryItems: [URLQueryItem]) -> URL? {
         var components = URLComponents()
         components.host = domain
         components.path = path
         components.scheme = scheme
         components.queryItems = queryItems
-        
-        guard let url = components.url else { return nil }
-        
-        var request = URLRequest(url: url, cachePolicy: .returnCacheDataElseLoad, timeoutInterval: timeout)
-        request.httpMethod = Method.get.rawValue
-        
-        return urlSession.dataTask(with: request, completionHandler: completion)
+        return components.url
     }
     
 }

@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		8563F801617F84B4CC924ABE /* Pods_MovieApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EA0D5E8C7694F006F80DF40 /* Pods_MovieApp.framework */; };
 		99AB7729206B4DE200E1A0B1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99AB7728206B4DE200E1A0B1 /* AppDelegate.swift */; };
-		99AB772B206B4DE200E1A0B1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99AB772A206B4DE200E1A0B1 /* ViewController.swift */; };
+		99AB772B206B4DE200E1A0B1 /* MoviesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99AB772A206B4DE200E1A0B1 /* MoviesViewController.swift */; };
 		99AB772E206B4DE200E1A0B1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 99AB772C206B4DE200E1A0B1 /* Main.storyboard */; };
 		99AB7731206B4DE200E1A0B1 /* MovieApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 99AB772F206B4DE200E1A0B1 /* MovieApp.xcdatamodeld */; };
 		99AB7733206B4DE200E1A0B1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 99AB7732206B4DE200E1A0B1 /* Assets.xcassets */; };
@@ -30,6 +30,8 @@
 		99ED6BCF206B83CE0007C51A /* Query.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99ED6BCE206B83CE0007C51A /* Query.swift */; };
 		99ED6BD1206B84060007C51A /* ImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99ED6BD0206B84060007C51A /* ImageService.swift */; };
 		99ED6BD5206B8A5D0007C51A /* Movie+NetworkRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99ED6BD4206B8A5D0007C51A /* Movie+NetworkRequests.swift */; };
+		99ED6BD8206CACED0007C51A /* NibRegisterable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99ED6BD7206CACED0007C51A /* NibRegisterable.swift */; };
+		99ED6BDA206CAD0E0007C51A /* NibInstantiating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99ED6BD9206CAD0E0007C51A /* NibInstantiating.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,7 +56,7 @@
 		3EA0D5E8C7694F006F80DF40 /* Pods_MovieApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MovieApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		99AB7725206B4DE200E1A0B1 /* MovieApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		99AB7728206B4DE200E1A0B1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		99AB772A206B4DE200E1A0B1 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		99AB772A206B4DE200E1A0B1 /* MoviesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesViewController.swift; sourceTree = "<group>"; };
 		99AB772D206B4DE200E1A0B1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		99AB7730206B4DE200E1A0B1 /* MovieApp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MovieApp.xcdatamodel; sourceTree = "<group>"; };
 		99AB7732206B4DE200E1A0B1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -80,6 +82,8 @@
 		99ED6BCE206B83CE0007C51A /* Query.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Query.swift; sourceTree = "<group>"; };
 		99ED6BD0206B84060007C51A /* ImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageService.swift; sourceTree = "<group>"; };
 		99ED6BD4206B8A5D0007C51A /* Movie+NetworkRequests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Movie+NetworkRequests.swift"; sourceTree = "<group>"; };
+		99ED6BD7206CACED0007C51A /* NibRegisterable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NibRegisterable.swift; sourceTree = "<group>"; };
+		99ED6BD9206CAD0E0007C51A /* NibInstantiating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NibInstantiating.swift; sourceTree = "<group>"; };
 		FA4867CC8D846952C912C9DA /* Pods-MovieApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovieApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MovieApp/Pods-MovieApp.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -152,10 +156,10 @@
 			isa = PBXGroup;
 			children = (
 				99AB7728206B4DE200E1A0B1 /* AppDelegate.swift */,
-				99AB772A206B4DE200E1A0B1 /* ViewController.swift */,
+				99AB772A206B4DE200E1A0B1 /* MoviesViewController.swift */,
 				99AB7737206B4DE200E1A0B1 /* Info.plist */,
 				99AB772C206B4DE200E1A0B1 /* Main.storyboard */,
-				99AB7734206B4DE200E1A0B1 /* LaunchScreen.storyboard */,
+				99ED6BD6206CACD90007C51A /* Generic */,
 				99ED6BCB206B82E80007C51A /* Model */,
 				99C820F3206B7DCF00706F33 /* Extensions */,
 				99C820EE206B728400706F33 /* Services */,
@@ -248,6 +252,16 @@
 				99AB7732206B4DE200E1A0B1 /* Assets.xcassets */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		99ED6BD6206CACD90007C51A /* Generic */ = {
+			isa = PBXGroup;
+			children = (
+				99AB7734206B4DE200E1A0B1 /* LaunchScreen.storyboard */,
+				99ED6BD7206CACED0007C51A /* NibRegisterable.swift */,
+				99ED6BD9206CAD0E0007C51A /* NibInstantiating.swift */,
+			);
+			path = Generic;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -446,11 +460,13 @@
 				99C820F0206B7A9D00706F33 /* MovieAppRequest.swift in Sources */,
 				99C820F5206B7DD700706F33 /* IntExtension.swift in Sources */,
 				99ED6BCF206B83CE0007C51A /* Query.swift in Sources */,
-				99AB772B206B4DE200E1A0B1 /* ViewController.swift in Sources */,
+				99AB772B206B4DE200E1A0B1 /* MoviesViewController.swift in Sources */,
 				99AB7729206B4DE200E1A0B1 /* AppDelegate.swift in Sources */,
+				99ED6BDA206CAD0E0007C51A /* NibInstantiating.swift in Sources */,
 				99AB7731206B4DE200E1A0B1 /* MovieApp.xcdatamodeld in Sources */,
 				99ED6BD1206B84060007C51A /* ImageService.swift in Sources */,
 				99C820F2206B7B7A00706F33 /* MovieService.swift in Sources */,
+				99ED6BD8206CACED0007C51A /* NibRegisterable.swift in Sources */,
 				99C820E7206B60FB00706F33 /* Endpoints.swift in Sources */,
 				99ED6BCD206B83C50007C51A /* Movie.swift in Sources */,
 				99ED6BD5206B8A5D0007C51A /* Movie+NetworkRequests.swift in Sources */,

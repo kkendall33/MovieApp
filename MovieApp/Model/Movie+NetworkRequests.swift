@@ -29,14 +29,17 @@ extension Movie {
     
     
     @discardableResult
-    static func requestMovies(with term: String, page: Int, completion: @escaping (_ movies: [Movie], _ error: Error?)->()) -> URLSessionDataTask? {
+    static func requestMovies(with term: String, page: Int, completion: @escaping (_ movieResponse: MovieResponse?, _ error: Error?)->()) -> URLSessionDataTask? {
         return movieService.requestMovies(term: term, page: page) { data, error in
-            var movies: [Movie] = []
+            var movie: MovieResponse?
             defer {
-                completion(movies, error)
+                if let data = data {
+                    print("\(try! JSONSerialization.jsonObject(with: data, options: []))")
+                }
+                completion(movie, error)
             }
             if let data = data, let movieResponse = try? JSONDecoder().decode(Movie.MovieResponse.self, from: data) {
-                movies = movieResponse.movies
+                movie = movieResponse
             }
         }
     }

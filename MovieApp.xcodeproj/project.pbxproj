@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		8563F801617F84B4CC924ABE /* Pods_MovieApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EA0D5E8C7694F006F80DF40 /* Pods_MovieApp.framework */; };
+		999530AF206CBC0D00A76504 /* MovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 999530AD206CBC0D00A76504 /* MovieCell.swift */; };
+		999530B0206CBC0D00A76504 /* MovieCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 999530AE206CBC0D00A76504 /* MovieCell.xib */; };
 		99AB7729206B4DE200E1A0B1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99AB7728206B4DE200E1A0B1 /* AppDelegate.swift */; };
 		99AB772B206B4DE200E1A0B1 /* MoviesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99AB772A206B4DE200E1A0B1 /* MoviesViewController.swift */; };
 		99AB772E206B4DE200E1A0B1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 99AB772C206B4DE200E1A0B1 /* Main.storyboard */; };
@@ -54,6 +56,8 @@
 /* Begin PBXFileReference section */
 		1CDD5AA339F2CD7A40E2B7C8 /* Pods-MovieApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovieApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-MovieApp/Pods-MovieApp.release.xcconfig"; sourceTree = "<group>"; };
 		3EA0D5E8C7694F006F80DF40 /* Pods_MovieApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MovieApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		999530AD206CBC0D00A76504 /* MovieCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCell.swift; sourceTree = "<group>"; };
+		999530AE206CBC0D00A76504 /* MovieCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MovieCell.xib; sourceTree = "<group>"; };
 		99AB7725206B4DE200E1A0B1 /* MovieApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		99AB7728206B4DE200E1A0B1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		99AB772A206B4DE200E1A0B1 /* MoviesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesViewController.swift; sourceTree = "<group>"; };
@@ -130,6 +134,17 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		999530AC206CBB5B00A76504 /* Movies */ = {
+			isa = PBXGroup;
+			children = (
+				99AB772A206B4DE200E1A0B1 /* MoviesViewController.swift */,
+				99AB772C206B4DE200E1A0B1 /* Main.storyboard */,
+				999530AD206CBC0D00A76504 /* MovieCell.swift */,
+				999530AE206CBC0D00A76504 /* MovieCell.xib */,
+			);
+			path = Movies;
+			sourceTree = "<group>";
+		};
 		99AB771C206B4DE200E1A0B1 = {
 			isa = PBXGroup;
 			children = (
@@ -156,9 +171,8 @@
 			isa = PBXGroup;
 			children = (
 				99AB7728206B4DE200E1A0B1 /* AppDelegate.swift */,
-				99AB772A206B4DE200E1A0B1 /* MoviesViewController.swift */,
 				99AB7737206B4DE200E1A0B1 /* Info.plist */,
-				99AB772C206B4DE200E1A0B1 /* Main.storyboard */,
+				999530AC206CBB5B00A76504 /* Movies */,
 				99ED6BD6206CACD90007C51A /* Generic */,
 				99ED6BCB206B82E80007C51A /* Model */,
 				99C820F3206B7DCF00706F33 /* Extensions */,
@@ -376,6 +390,7 @@
 			files = (
 				99AB7736206B4DE200E1A0B1 /* LaunchScreen.storyboard in Resources */,
 				99AB7733206B4DE200E1A0B1 /* Assets.xcassets in Resources */,
+				999530B0206CBC0D00A76504 /* MovieCell.xib in Resources */,
 				99AB772E206B4DE200E1A0B1 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -456,6 +471,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				99C820E5206B5A8500706F33 /* Request.swift in Sources */,
+				999530AF206CBC0D00A76504 /* MovieCell.swift in Sources */,
 				99C820E9206B679B00706F33 /* Path.swift in Sources */,
 				99C820F0206B7A9D00706F33 /* MovieAppRequest.swift in Sources */,
 				99C820F5206B7DD700706F33 /* IntExtension.swift in Sources */,

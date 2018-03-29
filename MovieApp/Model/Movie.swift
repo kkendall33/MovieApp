@@ -8,12 +8,13 @@
 
 import Foundation
 
-struct Movie: Codable {
+struct Movie: Codable, Equatable {
     var posterLocalPath: String?
     let posterServerPath: String
     let name: String
     let overview: String
-    let releaseDate: Date
+    let releaseDate: Date?
+    let identifier: Int
     
     enum CodingKeys: String, CodingKey {
         case name = "title"
@@ -21,6 +22,7 @@ struct Movie: Codable {
         case posterServerPath = "poster_path"
         case releaseDate = "release_date"
         case posterLocalPath = "poster_local_path"
+        case identifier = "id"
     }
     
     init(from decoder: Decoder) throws {
@@ -31,9 +33,18 @@ struct Movie: Codable {
         if let date = Movie.dateFormatter.date(from: textDate) {
             releaseDate = date
         } else {
-            throw MovieError.invalidDate
+            releaseDate = nil
         }
         self.posterServerPath = try container.decode(String.self, forKey: .posterServerPath)
+        self.identifier = try container.decode(Int.self, forKey: .identifier)
+    }
+    
+    static func ==(lhs: Movie, rhs: Movie) -> Bool {
+        return lhs.name == rhs.name &&
+            lhs.overview == rhs.overview &&
+            lhs.posterServerPath == rhs.posterServerPath &&
+            lhs.releaseDate == rhs.releaseDate &&
+            lhs.identifier == rhs.identifier
     }
     
 }

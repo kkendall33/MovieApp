@@ -31,8 +31,13 @@ public class QueryCore: NSManagedObject {
         let fetchRequest: NSFetchRequest<QueryCore> = QueryCore.fetchRequest()
         fetchRequest.fetchLimit = 1
         /// To remove `b` `ba` `bat` `batm` etc.
-        let allButLastCharacterTerm = String(term[..<term.index(before: term.endIndex)])
-        fetchRequest.predicate = NSPredicate(format: "%K == %@", #keyPath(QueryCore.term), allButLastCharacterTerm)
+        let predicateTerm: String
+        if term.count == 1 {
+            predicateTerm = term
+        } else {
+            predicateTerm = String(term[..<term.index(before: term.endIndex)])
+        }
+        fetchRequest.predicate = NSPredicate(format: "%K beginswith[cd] %@", #keyPath(QueryCore.term), predicateTerm)
         
         let queries = (try? context.fetch(fetchRequest)) ?? []
         return queries.first

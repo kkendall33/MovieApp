@@ -13,9 +13,7 @@ private let moviePageOffset = 3
 
 /// Displays a search bar and movies if they match the search term.
 final class MoviesViewController: UIViewController {
-    
-    private let imageService = ImageService()
-    
+        
     @IBOutlet private weak var tableView: UITableView!
     private var previousPage: Int = defaultMoviesPage
     private var didReachEnd = false

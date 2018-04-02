@@ -9,6 +9,7 @@
 import UIKit
 
 private let defaultMoviesPage = 1
+private let moviePageOffset = 3
 
 final class MoviesViewController: UIViewController {
     
@@ -21,7 +22,13 @@ final class MoviesViewController: UIViewController {
     private var searchTerm = "" {
         didSet {
             didReachEnd = false
-            requestMovies(with: searchTerm, page: defaultMoviesPage)
+            if searchTerm.isEmpty {
+                movies = []
+            } else {
+                requestMovies(with: searchTerm, page: defaultMoviesPage)
+            }
+            updateQuerySuggestionsDisplay()
+            querySuggestionsViewController.updateQueries()
         }
     }
     private lazy var searchBar: UISearchBar = {
@@ -30,15 +37,23 @@ final class MoviesViewController: UIViewController {
         searchBar.delegate = self
         return searchBar
     }()
+    private var searchBarHasFocus = false
     private var urlSession: URLSessionDataTask? {
         didSet {
             oldValue?.cancel()
         }
     }
     
+    lazy private var querySuggestionsViewController: QuerySuggestionsViewController = {
+        let viewController = QuerySuggestionsViewController.viewControllerFromStoryboard()
+        viewController.delegate = self
+        return viewController
+    }()
+    
     private var movies: [Movie] = [] {
         didSet {
             tableView.reloadData()
+            updateQuerySuggestionsDisplay()
         }
     }
     
@@ -46,8 +61,6 @@ final class MoviesViewController: UIViewController {
         super.viewDidLoad()
         setupTableView()
         navigationItem.titleView = searchBar
-        try? movieStore.saveContext()
-        searchTerm = "b"
     }
     
     private func setupTableView() {
@@ -62,21 +75,45 @@ final class MoviesViewController: UIViewController {
             DispatchQueue.main.async {
                 self?.loadingMovies = false
                 guard let _self = self else { return }
-                guard let movieResponse = movieResponse else { return }
-                // Handle errors here
+                guard let movieResponse = movieResponse else {
+                    _self.presentNoMoviesAlert(for: term)
+                    return
+                }
+                if movieResponse.movies.count == 0 && page == defaultMoviesPage {
+                    _self.presentNoMoviesAlert(for: term)
+                }
                 if error != nil {
-                    print("error: \(error)")
+                    print("&&&&&&&&&&&&&& error: \(error)")
                 }
-                
-                if page == defaultMoviesPage {
-                    _self.tableView.setContentOffset(CGPoint.zero, animated: false)
-                    _self.movies = movieResponse.movies
-                } else {
-                    _self.movies = _self.movies + movieResponse.movies
-                }
-                _self.didReachEnd = movieResponse.totalPages == movieResponse.page
+                _self.updateView(with: movieResponse, currentPage: page)
             }
         }
+    }
+    
+    private func updateView(with movieResponse: Movie.MovieResponse, currentPage: Int) {
+        let didReachEnd = movieResponse.totalPages <= movieResponse.page
+        
+        if currentPage == defaultMoviesPage {
+            tableView.setContentOffset(CGPoint.zero, animated: false)
+            movies = movieResponse.movies
+        } else if didReachEnd == false {
+            movies = movies + movieResponse.movies
+        }
+        self.didReachEnd = didReachEnd
+    }
+    
+    private func noMoviesAlert(for term: String) -> UIAlertController {
+        let alertTitle = NSLocalizedString("Oops.. We couldn't find any matches", comment: "Title of alert that was shown because the search term didn't match any results")
+        let alertMessage = NSLocalizedString("We couldn't find a movie with the title `%@`. Please try another term.", comment: "Title of alert that was shown because the search term didn't match any results")
+        let formattedAlertMessage = String(format: alertMessage, term)
+        let alertController = UIAlertController(title: alertTitle, message: formattedAlertMessage, preferredStyle: .alert)
+        alertController.addOkayAction()
+        return alertController
+    }
+    
+    private func presentNoMoviesAlert(for term: String) {
+        let alert = noMoviesAlert(for: term)
+        present(alert, animated: true, completion: nil)
     }
     
 }
@@ -103,7 +140,7 @@ extension MoviesViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if indexPath.row >= movies.count - 3 && loadingMovies == false && didReachEnd == false {
+        if indexPath.row >= movies.count - moviePageOffset && loadingMovies == false && didReachEnd == false {
             requestMovies(with: searchTerm, page: previousPage+1)
         }
     }
@@ -114,6 +151,57 @@ extension MoviesViewController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         searchTerm = searchText
+        updateQuerySuggestionsDisplay()
+    }
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        searchBarHasFocus = true
+        updateQuerySuggestionsDisplay()
+    }
+    
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        searchBarHasFocus = false
+        updateQuerySuggestionsDisplay()
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchTerm = searchBar.text ?? ""
+        searchBar.resignFirstResponder()
+    }
+    
+}
+
+extension MoviesViewController {
+    
+    private func updateQuerySuggestionsDisplay() {
+        if movies.count == 0 && searchBarHasFocus && searchBar.text?.isEmpty == true {
+            addQuerySuggestionsIfNeeded()
+        } else {
+            removeQuerySuggestionsIfNeeded()
+        }
+    }
+    
+    private func addQuerySuggestionsIfNeeded() {
+        guard querySuggestionsViewController.view.superview == nil else { return }
+        addChildViewController(querySuggestionsViewController)
+        querySuggestionsViewController.view.frame = view.frame
+        view.addSubview(querySuggestionsViewController.view)
+        querySuggestionsViewController.didMove(toParentViewController: self)
+    }
+    
+    private func removeQuerySuggestionsIfNeeded() {
+        querySuggestionsViewController.willMove(toParentViewController: nil)
+        querySuggestionsViewController.view.removeFromSuperview()
+        querySuggestionsViewController.removeFromParentViewController()
+    }
+    
+}
+
+extension MoviesViewController: QuerySuggestionsViewControllerDelegate {
+    
+    func querySuggestionsViewController(querySuggestionsViewController: QuerySuggestionsViewController, didSelect query: Query) {
+        searchBar.text = query.term
+        searchTerm = query.term
     }
     
 }

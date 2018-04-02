@@ -10,7 +10,7 @@ import Foundation
 
 struct Movie: Codable, Equatable {
     var posterLocalPath: String?
-    let posterServerPath: String
+    let posterServerPath: String?
     let name: String
     let overview: String
     let releaseDate: Date?
@@ -29,13 +29,13 @@ struct Movie: Codable, Equatable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.name = try container.decode(String.self, forKey: .name)
         self.overview = try container.decode(String.self, forKey: .overview)
-        let textDate = try container.decode(String.self, forKey: .releaseDate)
-        if let date = Movie.dateFormatter.date(from: textDate) {
+        let textDateOptional = try? container.decode(String.self, forKey: .releaseDate)
+        if let textDate = textDateOptional, let date = Movie.dateFormatter.date(from: textDate) {
             releaseDate = date
         } else {
             releaseDate = nil
         }
-        self.posterServerPath = try container.decode(String.self, forKey: .posterServerPath)
+        self.posterServerPath = try? container.decode(String.self, forKey: .posterServerPath)
         self.identifier = try container.decode(Int.self, forKey: .identifier)
     }
     

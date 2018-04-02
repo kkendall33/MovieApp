@@ -42,11 +42,24 @@ final class Store {
         self.persistentContainer = container
     }
     
-    func saveContext () throws {
-        let context = persistentContainer.viewContext
-        guard context.hasChanges else { return }
-        try context.save()
+    var mainContext: NSManagedObjectContext {
+        return persistentContainer.viewContext
     }
+    
+    func privateContext(block: @escaping (_ context: NSManagedObjectContext) -> ()) {
+        let context = persistentContainer.newBackgroundContext()
+        context.perform {
+            block(context)
+        }
+    }
+    
+    func privateContextAndWait(block: @escaping (_ context: NSManagedObjectContext) -> ()) {
+        let context = persistentContainer.newBackgroundContext()
+        context.performAndWait {
+            block(context)
+        }
+    }
+    
     
     // MARK: - Private members
     

@@ -36,6 +36,12 @@ extension Movie {
                 if let data = data {
                     print("\(try! JSONSerialization.jsonObject(with: data, options: []))")
                 }
+                if error == nil && page == 1, let movie = movie, movie.movies.count > 0 {
+                    movieStore.privateContext { context in
+                        QueryCore.updateQuery(with: term, in: context)
+                        try? context.save()
+                    }
+                }
                 completion(movie, error)
             }
             if let data = data, let movieResponse = try? JSONDecoder().decode(Movie.MovieResponse.self, from: data) {

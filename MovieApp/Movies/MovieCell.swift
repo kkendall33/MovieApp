@@ -31,6 +31,7 @@ final class MovieCell: UITableViewCell, NibRegisterable {
     override func awakeFromNib() {
         super.awakeFromNib()
         activityIndicatorView.isHidden = true
+        posterImageView.layer.cornerRadius = 5
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -50,15 +51,24 @@ final class MovieCell: UITableViewCell, NibRegisterable {
         overviewLabel.text = movieParameter.overview
         self.movie = movieParameter
         posterImageView.image = nil
+        activityIndicatorView.isHidden = false
         activityIndicatorView.startAnimating()
-        posterDownloadTask = MovieCell.imageService.downloadImage(with: movieParameter.posterServerPath, imageSize: .w185) { [weak self] url, error in
+        guard let posterPath = movieParameter.posterServerPath else {
+            activityIndicatorView.stopAnimating()
+            activityIndicatorView.isHidden = true
+            return
+        }
+        posterDownloadTask = MovieCell.imageService.downloadImage(with: posterPath, imageSize: .w185) { [weak self] url, error in
             DispatchQueue.main.async {
+                defer {
+                    self?.activityIndicatorView.stopAnimating()
+                    self?.activityIndicatorView.isHidden = true
+                }
                 guard let _self = self else { return }
                 guard let storedMovie = _self.movie, movieParameter == storedMovie else { return }
                 guard let url = url else { return }
                 let image = UIImage(contentsOfFile: url.path)
                 _self.posterImageView.image = image
-                _self.activityIndicatorView.stopAnimating()
             }
         }
     }

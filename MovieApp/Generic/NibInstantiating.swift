@@ -104,6 +104,7 @@ public extension StoryboardInstantiating where Self: UIViewController {
      - returns: `Self` This will be a `UIViewController` subclass generated from a `UIStoryboard`
      */
     public static func viewControllerFromStoryboard() -> Self {
+        print("\(storyboardName)")
         let storyboard = UIStoryboard(name: storyboardName, bundle: Bundle(for: Self.self))
         if let viewController = storyboard.instantiateInitialViewController() as? Self {
             return viewController

@@ -18,7 +18,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="8zS-CL-zpg">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="300" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="8zS-CL-zpg">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
@@ -30,9 +30,9 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="8zS-CL-zpg" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="OdZ-JK-qUC"/>
-                            <constraint firstItem="8zS-CL-zpg" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="c8F-lG-aGn"/>
-                            <constraint firstItem="8zS-CL-zpg" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="dib-vr-xSe"/>
-                            <constraint firstItem="8zS-CL-zpg" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="nsQ-f0-GXr"/>
+                            <constraint firstItem="8zS-CL-zpg" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailing" id="c8F-lG-aGn"/>
+                            <constraint firstItem="8zS-CL-zpg" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="dib-vr-xSe"/>
+                            <constraint firstItem="8zS-CL-zpg" firstAttribute="bottom" secondItem="8bC-Xf-vdC" secondAttribute="bottom" id="nsQ-f0-GXr"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -44,6 +44,40 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="476" y="120.98950524737631"/>
+        </scene>
+        <!--Query Suggestions View Controller-->
+        <scene sceneID="SPy-Bt-gRq">
+            <objects>
+                <viewController storyboardIdentifier="QuerySuggestionsViewController" id="l9L-3i-tq2" customClass="QuerySuggestionsViewController" customModule="MovieApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="6fC-pX-mFQ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="interactive" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="kGJ-lD-iPu">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="l9L-3i-tq2" id="3zs-So-lPe"/>
+                                    <outlet property="delegate" destination="l9L-3i-tq2" id="iLe-2c-n47"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="kGJ-lD-iPu" firstAttribute="top" secondItem="6fC-pX-mFQ" secondAttribute="top" id="HAe-i3-zfk"/>
+                            <constraint firstItem="kGJ-lD-iPu" firstAttribute="trailing" secondItem="6fC-pX-mFQ" secondAttribute="trailing" id="Xoq-Nz-CeB"/>
+                            <constraint firstItem="kGJ-lD-iPu" firstAttribute="bottom" secondItem="6fC-pX-mFQ" secondAttribute="bottom" id="af6-4n-jOB"/>
+                            <constraint firstItem="kGJ-lD-iPu" firstAttribute="leading" secondItem="6fC-pX-mFQ" secondAttribute="leading" id="y8C-7z-IAM"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="cJJ-eD-0JZ"/>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="kGJ-lD-iPu" id="dtq-Wi-pxO"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XHY-FF-kwt" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1292" y="136.28185907046478"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="DCL-6j-jeo">

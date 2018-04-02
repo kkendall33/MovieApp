@@ -8,13 +8,19 @@
 
 import Foundation
 
+/// Simiplify path creation
 public class Path {
     
+    /// Error when creating a path
+    ///
+    /// - invalidPathArgument: the path is invalid
+    /// - invalidOriginalPath: the original path is invalid
     public enum PathError: Error {
         case invalidPathArgument
         case invalidOriginalPath
     }
     
+    /// A path argument
     public struct Argument {
         let key: String
         let value: String
@@ -27,8 +33,11 @@ public class Path {
         try updatePath()
     }
     
+    /// The actual path that can be used to make a request.
     private(set) var path: String = ""
+    /// The original path provided to this `Path` instance.
     private(set) var originalPath: String
+    /// The arguments used in the path. Must correspond with `originalPath`
     private(set) var pathArguments: [Argument]
     
     private func updatePath() throws {

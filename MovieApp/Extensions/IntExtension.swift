@@ -6,6 +6,8 @@
 //  Copyright © 2018 Kyle Kendall. All rights reserved.
 //
 
+// Careem: A quick and testable way to convert Int to String.
+
 import Foundation
 
 extension Int {

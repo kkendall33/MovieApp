@@ -8,8 +8,16 @@
 
 import Foundation
 
+/// The service used to make requests to the movie database.
 final class MovieService {
     
+    /// Service used to request movies.
+    ///
+    /// - Parameters:
+    ///   - term: term used to query the movie database
+    ///   - page: The page of movies to fetch
+    ///   - completion: The closure called when the request completes
+    /// - Returns: The session data task. Can be used to cancel.
     @discardableResult
     func requestMovies(term: String, page: Int, with completion: @escaping (_ data: Data?, _ error: Error?)->()) -> URLSessionDataTask? {
         let apiKey = URLQueryItem(name: "api_key", value: tmdbAPIKey)

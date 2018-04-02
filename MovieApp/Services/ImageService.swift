@@ -8,8 +8,16 @@
 
 import Foundation
 
+/// Image service used to download images from the image server.
 final class ImageService {
     
+    /// Download an image from the image server
+    ///
+    /// - Parameters:
+    ///   - filePath: The path of the image to download
+    ///   - imageSize: The size of the image to download
+    ///   - completion: Completion called on return
+    /// - Returns: Download task. Can be used to cancel.
     @discardableResult
     func downloadImage(with filePath: String, imageSize: ImageSize, completion: @escaping (_ fileURL: URL?, _ error: Error?)->()) -> URLSessionDownloadTask? {
         let pathArgument = Path.Argument(key: "fileSize", value: imageSize.rawValue)

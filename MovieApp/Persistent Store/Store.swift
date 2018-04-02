@@ -16,6 +16,10 @@ struct StoreError: Error {
     var errors: [Error] = []
 }
 
+/// Used to simplify core data stack.
+/// initialize with a container name.
+/// Use `privateContext` or `privateContextAndWait` to fetch a context in the background.
+/// Use `mainContext` to fetch a context on main.
 final class Store {
     
     // MARK: - Public members
@@ -42,10 +46,14 @@ final class Store {
         self.persistentContainer = container
     }
     
+    /// Use this when working with UI.
     var mainContext: NSManagedObjectContext {
         return persistentContainer.viewContext
     }
     
+    /// Use this when working in the background or updating data asynchrounously.
+    ///
+    /// - Parameter block: block to be called asynchronously
     func privateContext(block: @escaping (_ context: NSManagedObjectContext) -> ()) {
         let context = persistentContainer.newBackgroundContext()
         context.perform {
@@ -53,6 +61,9 @@ final class Store {
         }
     }
     
+    /// Use this when working in the background or updating data synchrounously.
+    ///
+    /// - Parameter block: block to be called synchronously
     func privateContextAndWait(block: @escaping (_ context: NSManagedObjectContext) -> ()) {
         let context = persistentContainer.newBackgroundContext()
         context.performAndWait {

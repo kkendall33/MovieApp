@@ -6,6 +6,12 @@
 //  Copyright © 2018 Kyle Kendall. All rights reserved.
 //
 
+// Careem: I wrote NibRegisterable to clean up tableViews. Just make your `UITableViewCell` subclass
+// conform to this (literally just `class MyCell: UITableViewCell, NibRegisterable`) and
+// then you can get `tableView.register(MyCell.self)` for free
+// and `let cell: MyCell tableView.dequeueCell(indexPath: indexPath)`.
+// I LOVE this thing. It has simplified tables a lot for me and I feel it's pretty intuitive.
+
 import UIKit
 
 

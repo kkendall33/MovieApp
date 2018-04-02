@@ -8,6 +8,7 @@
 
 import UIKit
 
+/// Cell used to display a movie. Must call `configure(with: movie)`.
 final class MovieCell: UITableViewCell, NibRegisterable {
     
     private static let imageService = ImageService()
@@ -33,14 +34,10 @@ final class MovieCell: UITableViewCell, NibRegisterable {
         activityIndicatorView.isHidden = true
         posterImageView.layer.cornerRadius = 5
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
     
-    
+    /// Call early on to configure this cell.
+    ///
+    /// - Parameter movieParameter: Movie
     func configure(with movieParameter: Movie) {
         nameLabel.text = movieParameter.name
         if let releaseDate = movieParameter.releaseDate {

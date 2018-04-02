@@ -6,6 +6,10 @@
 //  Copyright © 2018 Kyle Kendall. All rights reserved.
 //
 
+// Careem: I wrote this because I was doing this in a lot of UIViewControllers. This makes the keyboard
+// not cover tableviews. Call `setupInsetAdjust` in `viewDidLoad` and conform to the protocol and
+// the content insets will be adjusted as needed.
+
 import UIKit
 
 protocol TableViewInsetsAdjusting: class {

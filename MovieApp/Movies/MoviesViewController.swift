@@ -11,6 +11,7 @@ import UIKit
 private let defaultMoviesPage = 1
 private let moviePageOffset = 3
 
+/// Displays a search bar and movies if they match the search term.
 final class MoviesViewController: UIViewController {
     
     private let imageService = ImageService()
@@ -75,6 +76,10 @@ final class MoviesViewController: UIViewController {
             DispatchQueue.main.async {
                 self?.loadingMovies = false
                 guard let _self = self else { return }
+                if error?.isCancelledError == true {
+                    // Don't show any alerts if they typed quick enough to cancel the previous request.
+                    return
+                }
                 guard let movieResponse = movieResponse else {
                     _self.presentNoMoviesAlert(for: term)
                     return
@@ -83,7 +88,7 @@ final class MoviesViewController: UIViewController {
                     _self.presentNoMoviesAlert(for: term)
                 }
                 if error != nil {
-                    print("&&&&&&&&&&&&&& error: \(error)")
+                    _self.presentUnkownErrorAlert()
                 }
                 _self.updateView(with: movieResponse, currentPage: page)
             }
@@ -116,6 +121,20 @@ final class MoviesViewController: UIViewController {
         present(alert, animated: true, completion: nil)
     }
     
+    private func unkownErrorAlert() -> UIAlertController {
+        let alertTitle = NSLocalizedString("Oops.. Something went wrong", comment: "Title of alert that was shown because the search term didn't match any results")
+        let alertMessage = NSLocalizedString("Unfortunately something went wrong with your search. Please try again later.", comment: "Title of alert that was shown because the search term didn't match any results")
+        let alertController = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
+        alertController.addOkayAction()
+        return alertController
+    }
+    
+    private func presentUnkownErrorAlert() {
+        let alert = unkownErrorAlert()
+        present(alert, animated: true, completion: nil)
+    }
+    
+    
 }
 
 extension MoviesViewController: UITableViewDataSource {
@@ -136,7 +155,7 @@ extension MoviesViewController: UITableViewDataSource {
 extension MoviesViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("selected")
+        
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {

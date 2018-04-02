@@ -8,14 +8,18 @@
 
 import UIKit
 
+/// Use this to communicate with another object anonymously.
 protocol QuerySuggestionsViewControllerDelegate: class {
     func querySuggestionsViewController(querySuggestionsViewController: QuerySuggestionsViewController, didSelect query: Query)
 }
 
+/// Displays previous search terms
 final class QuerySuggestionsViewController: UIViewController, StoryboardInstantiating, TableViewInsetsAdjusting {
     
+    /// Set an object to this that will receive updates.
     var delegate: QuerySuggestionsViewControllerDelegate?
     
+    /// Call this to update the queries displayed.
     func updateQueries() {
         queries = Query.fetchQueries(limit: 10)
     }

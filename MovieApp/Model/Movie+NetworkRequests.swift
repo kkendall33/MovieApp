@@ -33,9 +33,6 @@ extension Movie {
         return movieService.requestMovies(term: term, page: page) { data, error in
             var movie: MovieResponse?
             defer {
-                if let data = data {
-                    print("\(try! JSONSerialization.jsonObject(with: data, options: []))")
-                }
                 if error == nil && page == 1, let movie = movie, movie.movies.count > 0 {
                     movieStore.privateContext { context in
                         QueryCore.updateQuery(with: term, in: context)

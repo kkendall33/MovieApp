@@ -8,6 +8,7 @@
 
 import UIKit
 
+/// Cell used to display a query
 final class QueryCell: UITableViewCell, NibRegisterable {
 
     override func awakeFromNib() {
@@ -17,6 +18,9 @@ final class QueryCell: UITableViewCell, NibRegisterable {
     
     @IBOutlet private weak var queryLabel: UILabel!
     
+    /// Call this early on to display the query correctly
+    ///
+    /// - Parameter query: Query to be displayed
     func configure(with query: Query) {
         queryLabel.text = query.term
     }

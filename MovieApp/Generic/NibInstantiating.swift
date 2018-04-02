@@ -6,6 +6,11 @@
 //  Copyright © 2018 Kyle Kendall. All rights reserved.
 //
 
+// Careem: I wrote this to make it simpler to create a UIView from a `.xib` file.  This is also led the way
+// to `NibRegisterable`.
+// I like to break up protocols so they can be used in many different circumstances and it worked out very well with `NibRegisterable`.
+// I use this with all of my personal projects.
+
 
 import UIKit
 
@@ -104,7 +109,6 @@ public extension StoryboardInstantiating where Self: UIViewController {
      - returns: `Self` This will be a `UIViewController` subclass generated from a `UIStoryboard`
      */
     public static func viewControllerFromStoryboard() -> Self {
-        print("\(storyboardName)")
         let storyboard = UIStoryboard(name: storyboardName, bundle: Bundle(for: Self.self))
         if let viewController = storyboard.instantiateInitialViewController() as? Self {
             return viewController

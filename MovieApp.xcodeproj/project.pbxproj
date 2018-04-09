@@ -183,7 +183,6 @@
 				99C820E3206B59C900706F33 /* Network */,
 				99C820DE206B50F700706F33 /* Persistent Store */,
 				99ED6BD3206B87420007C51A /* Resources */,
-				99ED6BD2206B871F0007C51A /* Support */,
 			);
 			path = MovieApp;
 			sourceTree = "<group>";
@@ -268,13 +267,6 @@
 				99ED6BCE206B83CE0007C51A /* Query.swift */,
 			);
 			path = Model;
-			sourceTree = "<group>";
-		};
-		99ED6BD2206B871F0007C51A /* Support */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Support;
 			sourceTree = "<group>";
 		};
 		99ED6BD3206B87420007C51A /* Resources */ = {

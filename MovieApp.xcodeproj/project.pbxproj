@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8563F801617F84B4CC924ABE /* Pods_MovieApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EA0D5E8C7694F006F80DF40 /* Pods_MovieApp.framework */; };
 		999530AF206CBC0D00A76504 /* MovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 999530AD206CBC0D00A76504 /* MovieCell.swift */; };
 		999530B0206CBC0D00A76504 /* MovieCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 999530AE206CBC0D00A76504 /* MovieCell.xib */; };
 		99AB7729206B4DE200E1A0B1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99AB7728206B4DE200E1A0B1 /* AppDelegate.swift */; };
@@ -112,7 +111,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8563F801617F84B4CC924ABE /* Pods_MovieApp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -317,12 +315,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 99AB7750206B4DE200E1A0B1 /* Build configuration list for PBXNativeTarget "MovieApp" */;
 			buildPhases = (
-				40C8E9FB36BB7C0BCFECF4AF /* [CP] Check Pods Manifest.lock */,
 				99AB7721206B4DE200E1A0B1 /* Sources */,
 				99AB7722206B4DE200E1A0B1 /* Frameworks */,
 				99AB7723206B4DE200E1A0B1 /* Resources */,
-				F10FA260CDF7322060A2BAE2 /* [CP] Embed Pods Frameworks */,
-				6D4047414FD21C27FE3ACDE2 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -443,60 +438,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		40C8E9FB36BB7C0BCFECF4AF /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-MovieApp-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		6D4047414FD21C27FE3ACDE2 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MovieApp/Pods-MovieApp-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		F10FA260CDF7322060A2BAE2 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-MovieApp/Pods-MovieApp-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/EasyCreate/EasyCreate.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/EasyCreate.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MovieApp/Pods-MovieApp-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		99AB7721206B4DE200E1A0B1 /* Sources */ = {

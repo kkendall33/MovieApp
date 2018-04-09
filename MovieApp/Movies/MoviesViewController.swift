@@ -18,18 +18,24 @@ final class MoviesViewController: UIViewController {
     private var previousPage: Int = defaultMoviesPage
     private var didReachEnd = false
     private var loadingMovies = false
-    private var searchTerm = "" {
-        didSet {
-            didReachEnd = false
-            if searchTerm.isEmpty {
-                movies = []
-            } else {
-                requestMovies(with: searchTerm, page: defaultMoviesPage)
-            }
-            updateQuerySuggestionsDisplay()
-            querySuggestionsViewController.updateQueries()
+    
+    private var didBackspace = false
+    
+    private func updateSearchTerm(with term: String, saveQuery: Bool = true) {
+        searchTerm = term
+        didReachEnd = false
+        if searchTerm.isEmpty {
+            movies = []
+        } else {
+            requestMovies(with: searchTerm, page: defaultMoviesPage, saveQuery: saveQuery)
         }
+        updateQuerySuggestionsDisplay()
+        querySuggestionsViewController.updateQueries()
     }
+    
+    /// Use `updateSearchTerm` to set this value
+    private var searchTerm = ""
+    
     private lazy var searchBar: UISearchBar = {
         let searchBar = UISearchBar()
         searchBar.placeholder = NSLocalizedString("Search", comment: "Placeholder text that is displayed in a search bar.")
@@ -67,10 +73,10 @@ final class MoviesViewController: UIViewController {
         tableView.register(MovieCell.self)
     }
     
-    private func requestMovies(with term: String, page: Int) {
+    private func requestMovies(with term: String, page: Int, saveQuery: Bool = true) {
         previousPage = page
         loadingMovies = true
-        urlSession = Movie.requestMovies(with: term, page: page) { [weak self] movieResponse, error in
+        urlSession = Movie.requestMovies(with: term, page: page, saveQuery: saveQuery) { [weak self] movieResponse, error in
             DispatchQueue.main.async {
                 self?.loadingMovies = false
                 guard let _self = self else { return }
@@ -158,7 +164,7 @@ extension MoviesViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if indexPath.row >= movies.count - moviePageOffset && loadingMovies == false && didReachEnd == false {
-            requestMovies(with: searchTerm, page: previousPage+1)
+            requestMovies(with: searchTerm, page: previousPage+1, saveQuery: false)
         }
     }
     
@@ -166,8 +172,14 @@ extension MoviesViewController: UITableViewDelegate {
 
 extension MoviesViewController: UISearchBarDelegate {
     
+    func searchBar(_ searchBar: UISearchBar, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        didBackspace = text == ""
+        return true
+    }
+    
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        searchTerm = searchText
+        //        searchTerm = searchText
+        updateSearchTerm(with: searchText, saveQuery: !didBackspace)
         updateQuerySuggestionsDisplay()
     }
     
@@ -182,7 +194,7 @@ extension MoviesViewController: UISearchBarDelegate {
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        searchTerm = searchBar.text ?? ""
+        updateSearchTerm(with: searchBar.text ?? "")
         searchBar.resignFirstResponder()
     }
     

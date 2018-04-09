@@ -29,11 +29,11 @@ extension Movie {
     
     
     @discardableResult
-    static func requestMovies(with term: String, page: Int, completion: @escaping (_ movieResponse: MovieResponse?, _ error: Error?)->()) -> URLSessionDataTask? {
+    static func requestMovies(with term: String, page: Int, saveQuery: Bool, completion: @escaping (_ movieResponse: MovieResponse?, _ error: Error?)->()) -> URLSessionDataTask? {
         return movieService.requestMovies(term: term, page: page) { data, error in
             var movie: MovieResponse?
             defer {
-                if error == nil && page == 1, let movie = movie, movie.movies.count > 0 {
+                if error == nil && page == 1, let movie = movie, movie.movies.count > 0 && saveQuery {
                     movieStore.privateContext { context in
                         QueryCore.updateQuery(with: term, in: context)
                         try? context.save()
